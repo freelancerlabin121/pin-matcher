@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+
+                    
+
+                    <form name="rn">
+                        <input class="form-control" type="text" id="tb" name="tb" />
+                    
+                      
+                        <input  class="generate-btn"  type="button" value=" Pin" onclick="randomValue();" />
+                      </form>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                     <input  class="form-control " id="your-input-id" value="" type="text" />
+
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                              
+                              <button class="number-button button" value="7">7</button>
+                              <button class="number-button button" value="8">8</button>
+                              <button class="number-button button" value="9">9</button>
+
+
+
+                            </div>
+                            <div class="calc-button-row">
+                             
+                              <button class="number-button button" value="4">4</button>
+                              <button class="number-button button" value="5">5</button>
+                              <button class="number-button button" value="6">6</button>
+
+
+
+
+
+
+                            </div>
+                            <div class="calc-button-row">
+                             
+                              <button class="number-button button" value="1">1</button>
+
+                              <button class="number-button button" value="2">2</button>
+
+                              <button class="number-button button" value="3">3</button>
+
+
+
+
+
+                              
+                            </div>
+                            <div class="calc-button-row">
+                                <button onclick="removeTextTag()" class="number-button button" ><</button>
+
+                                <button class="number-button button" value="0">0</button>
+
+                                <button onclick="document.getElementById('your-input-id').value = ''" class="number-button button" >C</button>
+
+                            </div>
+                            <div>
+                                <button   id="pin" type="submit" class="submit-btn">Submit</button>
+                                <!-- <p id="left" class="action-left">3 try left</p> -->
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+              <p id="failed" class="notify">❌ Pin Didn't Match, Please try again</p> 
+              <p id="success" class="notify">✅ Pin Matched... Secret door is opening for you</p> 
+        </div>
+    </div>
+    <script>
+
+
+
+var input = document.querySelector("#your-input-id")
+var buttons = document.querySelectorAll("button.number-button")
+
+
+for (i = 0; i < buttons.length; i++) {
+  buttons[i].addEventListener("click", function(event) {
+    input.value = input.value + event.currentTarget.value
+  })
+}
+function Random() {
+  return Math.floor(Math.random() * 10000);
+}
+
+function randomValue() {
+  document.getElementById('tb').value = Random();
+}
+
+     document.getElementById('pin').addEventListener('click', function(){
+
+    var randomNumber = document.getElementById('tb').value;
+    var inputNumber = document.getElementById('your-input-id').value;
+    
+     if ( randomNumber == inputNumber) {
+        document.getElementById('success').style.display = 'block';
+
+          document.getElementById('failed').style.display = 'none';
+
+         }
+         else{
+            document.getElementById('success').style.display = 'none';
+            document.getElementById('failed').style.display = 'block';
+
+
+         }
+     })
+      
+     function removeTextTag()
+        {
+        var strng=document.getElementById("your-input-id").value;
+        document.getElementById("your-input-id").value = strng.substring(0,strng.length-1)
+        }
+        
+
+   </script>
+</body>
+</html>
